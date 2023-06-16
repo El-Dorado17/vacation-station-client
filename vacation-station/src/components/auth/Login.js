@@ -10,6 +10,25 @@ export const Login = () => {
     const invalidDialog = useRef()
     const navigate = useNavigate()
 
+    
+    // const handleLogin = (e) => {
+    //     e.preventDefault()
+    //     const user = {
+    //         username: username.current.value,
+    //         password: password.current.value
+    //     }
+    //     loginUser(user)
+    //         .then(res => {
+    //             if ("valid" in res && res.valid && "token" in res) { //if res.valid & "valid" is in res, and "token" in res
+    //                 localStorage.setItem("vacation_user", res.token) 
+    //                 navigate("/")
+    //             }
+    //             else {
+    //                 invalidDialog.current.showModal()
+    //             }
+    //         })
+    // }
+
 const handleLogin = (e) => {
     e.preventDefault()
     const user = {
@@ -19,7 +38,7 @@ const handleLogin = (e) => {
     loginUser(user)
         .then(authInfo => {
         if (authInfo.valid) {
-            localStorage.setItem("vacation", JSON.stringify(authInfo))
+            localStorage.setItem("vacation_user", JSON.stringify(authInfo))
             navigate("/")
         } else {
             invalidDialog.current.showModal()

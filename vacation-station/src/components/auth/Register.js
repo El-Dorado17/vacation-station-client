@@ -22,8 +22,9 @@ const handleRegister = (e) => {
             });
         })
         .then((createdUser) => {
-            localStorage.setItem("vacation", JSON.stringify(createdUser));
+            localStorage.setItem("vacation_user", JSON.stringify(createdUser));
             navigate("/");
+
         })
         .catch((error) => {
             setFeedback(JSON.parse(error.message).message);
