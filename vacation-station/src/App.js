@@ -1,8 +1,11 @@
 import { ApplicationViews } from "./views/ApplicationViews"
-
+import { NavBar } from "./components/nav/NavBar"
 
 export const App = () => {
-    return <ApplicationViews />
+    return <>
+    <NavBar />
+    <ApplicationViews />
+    </>
 }
 
 

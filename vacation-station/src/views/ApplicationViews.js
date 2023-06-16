@@ -3,6 +3,7 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 
 import { VacationList } from "../components/vacations/VacationList"
+import { VacationForm } from "../components/vacations/VacationForm"
 
 
 export const ApplicationViews = () => {
@@ -10,5 +11,6 @@ export const ApplicationViews = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<VacationList />} />
+        <Route path="/vacationform" element={<VacationForm />} />
     </Routes>
 }  

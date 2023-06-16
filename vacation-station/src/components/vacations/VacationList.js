@@ -8,15 +8,11 @@ export const VacationList = (props) => {
 
     useEffect(() => {
         getVacations().then(data => setVacations(data))
-    }, [])
+    }, []) 
+
 
     return (
         <article className="vacations">
-            <button className="btn btn-2 btn-sep icon-create"
-            onClick={() => {
-                Navigate({ pathname: "/vacations/new" })
-            }}
-            >Register New Vacation</button>
             {
                 vacations.map(vacation => {
                     return <section key={`vacation--${vacation.id}`} className="vacation_post">
@@ -34,9 +30,3 @@ export const VacationList = (props) => {
         </article>
     )
 }
-
-/*
-
-        fields = ('id', 'country', 'city', 'vacation_type',
-                    'user', 'description', 'number_of_people', 'price', 'rating'
-*/
