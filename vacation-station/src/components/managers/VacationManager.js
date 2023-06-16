@@ -13,9 +13,12 @@ export const getVacations = () => {
 export const createVacation = (vacation) => {
     let token = getToken()
     return fetch("http://localhost:8000/vacations", {
+        method: "POST",
         headers: {
+            "Content-Type": "application/json",
             "authorization": `Token ${token}`
-        }
+        },
+        body: JSON.stringify(vacation)
     })
         .then(response => response.json())
 }

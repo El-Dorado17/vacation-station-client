@@ -19,7 +19,7 @@ export const VacationList = (props) => {
                         <div className="vacation__country"> Country: {vacation.country}</div>
                         <div className="vacation__city"> City: {vacation.city} </div>
                         <div className="vacation__vacation_type"> Vacation Type: {vacation.vacation_type} </div>
-                        <div className="vacation__user"> User: {vacation.user} </div>
+                        <div className="vacation__user"> vacation_user: {vacation.vacation_user} </div>
                         <div className="vacation__description"> Description: {vacation.description} </div>
                         <div className="vacation__number_of_people"> Num of ppl: {vacation.number_of_people} </div>
                         <div className="vacation__price"> Price: {vacation.price} </div>

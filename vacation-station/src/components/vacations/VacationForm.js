@@ -17,7 +17,7 @@ export const VacationForm = () => {
         country: 0,
         city: "",
         vacation_type: 0,
-        user: 0,
+        vacation_user: 0,
         description: "",
         number_of_people: 0,
         price: 0,
@@ -55,7 +55,7 @@ export const VacationForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="country">Country: </label>
-                    <input type="text" name="country" required autoFocus className="form-control"/>
+                    <input type="number" name="country" required autoFocus className="form-control"/>
                 </div>
             </fieldset>
 
@@ -69,14 +69,14 @@ export const VacationForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="vacationtypeid">Vacation Type: </label>
-                    <input type="select" name="vacationtypeid" required autoFocus className="form-control"/>
+                    <input type="number" name="vacationtypeid" required autoFocus className="form-control"/>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="user">User: </label>
-                    <input type="number" name="user" required autoFocus className="form-control"/>
+                    <label htmlFor="vacation_user">Vacation User: </label>
+                    <input type="number" name="vacation_user" required autoFocus className="form-control"/>
                 </div>
             </fieldset>
 
@@ -116,9 +116,9 @@ export const VacationForm = () => {
 
                     const vacation = {
                         country: currentVacation.country,
-                        country: currentVacation.country,
                         city: currentVacation.city,
                         vacation_type: currentVacation.vacation_type,
+                        vacation_user: currentVacation.vacation_user,
                         description: currentVacation.description,
                         number_of_people: currentVacation.number_of_people ,
                         price: currentVacation.price,

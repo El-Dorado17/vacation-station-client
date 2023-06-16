@@ -7,7 +7,7 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="VacationForm">
-                <button classname="VacationForm"
+                <button className="VacationForm"
                 onClick={() => {
                     navigate('/vacationform')
                 }}>
