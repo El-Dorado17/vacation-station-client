@@ -7,12 +7,6 @@ import { getVacationTypes } from "../managers/VacationManager.js"
 export const VacationForm = () => {
     const navigate = useNavigate()
     const [vacationTypes, setVacationTypes] = useState([])
-
-    /*
-        Since the input fields are bound to the values of
-        the properties of this state variable, you need to
-        provide some default values.
-    */
     const [currentVacation, setCurrentVacation] = useState({
         country: 0,
         city: "",
@@ -25,33 +19,23 @@ export const VacationForm = () => {
     })
 
     useEffect(() => {
-        // TODO: Get the Vacation types, then set the state
-        //getVacationTypes is a fetch request, .then means it will get the data and
-        // hold it until given further instruction. setGameTypes is..?
-        getVacationTypes().then(setVacationTypes)
-        //.then((data)=>setVacationTypes(data))
+        getVacationTypes().then((data)=>setVacationTypes(data))
     }, [])
 
-    const changeVacationState = (domEvent) => {
-        // TODO: Complete the onChange function
-        const {name, value} = domEvent.target
+    const changeVacationState = (e) => {
+        const {name, value} = e.target
         setCurrentVacation(
             {...currentVacation,
-                [domEvent.target.name]: value
+                [e.target.name]: value
             }
         )
     }
-    /*
-    const copy = {...currentVacation}
-        copy.name = domEvent.target.name
-        setCurrentVacation(copy)
-    */
-
+                        //! make country a select
+    
     
     return (
         <form className="vacationForm">
             <h2 className="vacationForm__title">Register New Vacation</h2>
-
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="country">Country: </label>
@@ -120,7 +104,7 @@ export const VacationForm = () => {
                         vacation_type: currentVacation.vacation_type,
                         vacation_user: currentVacation.vacation_user,
                         description: currentVacation.description,
-                        number_of_people: currentVacation.number_of_people ,
+                        number_of_people: currentVacation.number_of_people,
                         price: currentVacation.price,
                         rating: currentVacation.rating
                     }

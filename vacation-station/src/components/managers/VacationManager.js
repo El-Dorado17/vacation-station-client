@@ -23,6 +23,35 @@ export const createVacation = (vacation) => {
         .then(response => response.json())
 }
 
+export const updateVacation = (updatedVacation, vacationId) => {
+    return fetch(`http://localhost:8000/vacations/${vacationId}`, {
+        method: "PUT",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${getToken()}`
+        },
+        body: JSON.stringify(updatedVacation)
+    })
+    .then(res => {
+        if (!res.ok) {
+        throw Error(res.statusText);
+        }
+        return res.json();
+    })
+    .catch(error => console.log(error));
+};
+
+export const deleteVacation = (id) => {
+    return fetch(`http://localhost:8000/vacations/${id}`, {
+        method: "DELETE",
+        headers: {
+        Authorization: `Token ${getToken()}`
+        }
+    }
+    )
+}
+
+
 export const getVacationTypes = () => {
     let token = getToken()
     return fetch("http://localHost:8000/vacationtypes", {
@@ -31,4 +60,23 @@ export const getVacationTypes = () => {
         }
     })
         .then(response => response.json())
+}
+
+export const getVacationById = (id) => {
+    return fetch(`http://localhost:8000/vacations/${id}`, {
+      headers: {
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+  }
+
+
+export const getAllVacationtypes = () => {
+  return fetch("http://localhost:8000/vacationtypes", {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
+    .then(res => res.json())
 }
