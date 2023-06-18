@@ -4,6 +4,7 @@ import { Register } from "../components/auth/Register"
 
 import { VacationList } from "../components/vacations/VacationList"
 import { VacationForm } from "../components/vacations/VacationForm"
+import { UpdateVacation } from "../components/vacations/UpdateVacation"
 
 
 export const ApplicationViews = () => {
@@ -12,5 +13,6 @@ export const ApplicationViews = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<VacationList />} />
         <Route path="/vacationform" element={<VacationForm />} />
+        <Route path="/updatevacation" element={<UpdateVacation />} />
     </Routes>
 }  

@@ -6,7 +6,7 @@ export const NavBar = () => {
     const navigate = useNavigate()
     return (
         <ul className="navbar">
-            <li className="VacationForm">
+            <li className="navButton">
                 <button className="VacationForm"
                 onClick={() => {
                     navigate('/vacationform')
@@ -14,12 +14,15 @@ export const NavBar = () => {
                     Register A Vacation
                 </button>
             </li>
-            <li className="navbar__item">
-                Navigation link
+            <li className="navButton">
+                <button className="UpdateForm"
+                onClick={() => {
+                    navigate('/updatevacation')
+                }}>
+                    Update A Vacation
+                </button>
             </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
+
             {
                 (localStorage.getItem("vacation_user") !== null) ?
                     <li className="nav-item">

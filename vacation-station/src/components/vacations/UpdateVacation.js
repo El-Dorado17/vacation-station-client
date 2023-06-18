@@ -1,18 +1,9 @@
-
-
-/*
-A react route that renders a form //? Imported to AppViews
-The form should be filled out with the existing data
-When changes are made in the form the state of the component updates
-When the submit button is clicked, it should make a PUT request to the correct resource with the updated data in the body
-After the fetch call is resolved, the page should route to the game/event’s detail page
-*/
-
-
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getAllVacationtypes, getVacationById, updateVacation } from "../../managers/VacationManager";
+import { getAllVacationtypes, getVacationById, updateVacation } from "../managers/VacationManager";
 import { getVacations } from "../managers/VacationManager";
+
+
 
 export const UpdateVacation = () => {
 const {vacationId} = useParams()
@@ -35,10 +26,14 @@ useEffect (()=> {
         setVacation(res)
         setCurrentVacation({
             ...currentVacation,
-            title: res?.title,
-            maker: res?.maker,
-            number_of_players: res?.number_of_players,
-            skill_level: res?.skill_level,
+            country: parseInt(res?.country?.id),
+            city: res?.city,
+            vacation_type: parseInt(res?.vacation_type?.id),
+            vacation_user: parseInt(res?.vacation_user?.id),
+            description: res?.description,
+            number_of_people: res?.number_of_people,
+            price: res?.price,
+            rating:res?.rating,
             game_type: parseInt(res?.game_type?.id)
         })
     })
@@ -59,15 +54,15 @@ return (
         <h2 className="vacationForm_description"> Update Vacation</h2>
         <fieldset>
             <div className="form-group">
-                <label htmlFor="title"> Title </label>
+                <label htmlFor="country"> Country </label>
                 <input
                     type="text"
-                    name="title"
+                    name="country"
                     required
                     autoFocus
                     className="form-control"
-                    value={currentVacation.title}
-                    placeholder={vacation.title}
+                    value={currentVacation.country}
+                    placeholder={vacation.country}
                     onChange={changeVacationState}
                     />
             </div>
@@ -75,52 +70,120 @@ return (
 
         <fieldset>
             <div className="form-group">
-                <label htmlFor="maker"> Maker </label>
+                <label htmlFor="city"> City </label>
                 <input
                     type="text"
-                    name="maker"
+                    name="city"
                     required
                     autoFocus
                     className="form-control"
-                    value={currentGame.maker}
-                    placeholder={game.maker}
-                    onChange={changeGameState}
+                    value={currentVacation.city}
+                    placeholder={vacation.city}
+                    onChange={changeVacationState}
                     />
             </div>
         </fieldset>
 
         <fieldset>
             <div className="form-group">
-                <label htmlFor="number_of_players"> Number of Players </label>
+                <label htmlFor="vacation_type"> vacation_type </label>
                 <input
-                    type="text"
-                    name="number_of_players"
+                    type="number"
+                    name="vacation_type"
                     required
                     autoFocus
                     className="form-control"
-                    value={currentGame.number_of_players}
-                    placeholder={game.number_of_players}
-                    onChange={changeGameState}
+                    value={currentVacation.vacation_type}
+                    placeholder={vacation.vacation_type}
+                    onChange={changeVacationState}
                     />
             </div>
         </fieldset>
 
+
         <fieldset>
             <div className="form-group">
-                <label htmlFor="game_type"> Game Type </label>
-                <select name="game_type" onChange={changeGameState}>
-                    <option defaultValue={game?.game_type?.id}> {game?.game_type?.label} </option>
-                    {gameTypes.map((game_type)=> (
-                        <option key={game_type.id} value={game_type.id}>
-                            {game_type.label}
-                        </option>
-                    ))}
-
-
-                </select>
+                <label htmlFor="vacation_user"> Vacation User </label>
+                <input
+                    user="text"
+                    name="vacation_user"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.vacation_user}
+                    placeholder={vacation.vacation_user}
+                    onChange={changeVacationState}
+                    />
             </div>
         </fieldset>
 
+
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="description"> Description </label>
+                <input
+                    type="text"
+                    name="description"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.description}
+                    placeholder={vacation.description}
+                    onChange={changeVacationState}
+                    />
+            </div>
+        </fieldset>
+
+
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="number_of_people"> Number of People </label>
+                <input
+                    type="text"
+                    name="number_of_people"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.number_of_people}
+                    placeholder={vacation.number_of_people}
+                    onChange={changeVacationState}
+                    />
+            </div>
+        </fieldset>
+
+
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="price"> Price </label>
+                <input
+                    type="text"
+                    name="price"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.price}
+                    placeholder={vacation.price}
+                    onChange={changeVacationState}
+                    />
+            </div>
+        </fieldset>
+
+
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="rating"> Rating </label>
+                <input
+                    type="text"
+                    name="rating"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.rating}
+                    placeholder={vacation.rating}
+                    onChange={changeVacationState}
+                    />
+            </div>
+        </fieldset>
         
     <button type="submit"
             onClick={evt => {
