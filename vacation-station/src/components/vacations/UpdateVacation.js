@@ -9,7 +9,7 @@ export const UpdateVacation = () => {
 const {vacationId} = useParams()
 const navigate = useNavigate()
 const [vacationTypes, setVacationTypes] = useState([])
-const [vacation, setVacation] = useState([])
+const [vacation, setVacation] = useState({})
 const [currentVacation, setCurrentVacation] = useState({
         id: 0,
         country: 0,
@@ -22,59 +22,43 @@ const [currentVacation, setCurrentVacation] = useState({
         rating: 0
 })
 
-useEffect (()=> {
-    getVacationById(vacationId).then((res)=> {
-        setVacation(res)
-        setCurrentVacation({
-            ...currentVacation,
-            id: parseInt(res?.vacation?.id),
-            country: parseInt(res?.country?.id),
-            city: res?.city,
-            vacation_type: parseInt(res?.vacation_type?.id),
-            vacation_user: parseInt(res?.vacation_user?.id),
-            description: res?.description,
-            number_of_people: res?.number_of_people,
-            price: res?.price,
-            rating:res?.rating,
-            game_type: parseInt(res?.game_type?.id)
-        })
-    })
-}, [vacationId, currentVacation])
+// useEffect (()=> {
+//     getVacationById(vacationId).then((res)=> {
+//         setVacation(res)
+//         setCurrentVacation({
+//             ...currentVacation,
+//            // id: parseInt(res?.vacation?.id),
+//             country: parseInt(res?.country?.id),
+//             city: res?.city,
+//             vacation_type: parseInt(res?.vacation_type?.id),
+//             vacation_user: parseInt(res?.vacation_user?.id),
+//             description: res?.description,
+//             number_of_people: res?.number_of_people,
+//             price: res?.price,
+//             rating:res?.rating,
+//         })
+//     })
+// }, [vacationId, currentVacation])
 
 useEffect(()=> {
-    getAllVacationtypes().then((data)=> setVacationTypes(data))
+    getVacations().then((data)=> setVacation(data))
 }, [])
 
 const changeVacationState = (evt) => {
     const {name, value} = evt.target
-    setCurrentVacation({ ...currentVacation, [evt.target.name]: value })
+    setCurrentVacation((prevState)=> ({...prevState, [name]: value }))
 }
 
 
 return (
     <form className="vacationForm">
-        <h2 className="vacationForm_description"> Update Vacation</h2>
-        <fieldset>
-            <div className="form-group">
-                <label htmlFor="id"> Vacation ID </label>
-                <input
-                    type="text"
-                    name="id"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentVacation.id}
-                    placeholder={vacation.id}
-                    onChange={changeVacationState}
-                    />
-            </div>
-        </fieldset>
+        <h2 className="vacationForm_description"> Updating Vacation: {vacationId} </h2>
 
         <fieldset>
             <div className="form-group">
                 <label htmlFor="country"> Country </label>
                 <input
-                    type="text"
+                    type="number"
                     name="country"
                     required
                     autoFocus
@@ -118,24 +102,6 @@ return (
             </div>
         </fieldset>
 
-
-        <fieldset>
-            <div className="form-group">
-                <label htmlFor="vacation_user"> Vacation User </label>
-                <input
-                    user="text"
-                    name="vacation_user"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentVacation.vacation_user}
-                    placeholder={vacation.vacation_user}
-                    onChange={changeVacationState}
-                    />
-            </div>
-        </fieldset>
-
-
         <fieldset>
             <div className="form-group">
                 <label htmlFor="description"> Description </label>
@@ -157,7 +123,7 @@ return (
             <div className="form-group">
                 <label htmlFor="number_of_people"> Number of People </label>
                 <input
-                    type="text"
+                    type="number"
                     name="number_of_people"
                     required
                     autoFocus
@@ -174,7 +140,7 @@ return (
             <div className="form-group">
                 <label htmlFor="price"> Price </label>
                 <input
-                    type="text"
+                    type="number"
                     name="price"
                     required
                     autoFocus
@@ -191,7 +157,7 @@ return (
             <div className="form-group">
                 <label htmlFor="rating"> Rating </label>
                 <input
-                    type="text"
+                    type="number"
                     name="rating"
                     required
                     autoFocus
@@ -221,13 +187,11 @@ return (
                 }
 
                 // Send POST request to your API
-                UpdateVacation(vacation, vacationId)
-                    .then(() => navigate("/vacations"))
+                updateVacation(vacation.id, vacation) //!vacation 
+                    .then(() => navigate("/uservacations"))
             }}
-            className="btn btn-primary">Update Vacation
+            className="btn btn-primary">Update
             </button>
 </form>
 )
-
-
 }

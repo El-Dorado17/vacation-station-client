@@ -33,8 +33,8 @@ export const createVacation = (vacation) => {
         .then(response => response.json())
 }
 
-export const updateVacation = (updatedVacation, vacationId) => {
-    return fetch(`http://localhost:8000/vacations/${vacationId}`, {
+export const updateVacation = (id, updatedVacation) => {
+    return fetch(`http://localhost:8000/vacations/${id}`, { //{updtvacatin} expects id but got obj
         method: "PUT",
         headers: {
         "Content-Type": "application/json",

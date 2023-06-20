@@ -14,7 +14,7 @@ export const ApplicationViews = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<VacationList />} />
         <Route path="/vacationform" element={<VacationForm />} />
-        <Route path="/updatevacation" element={<UpdateVacation />} />
+        <Route path="/updateform/:vacationId" element={<UpdateVacation />} />
         <Route path="/uservacations" element={<YourVacations />} />
     </Routes>
 }  

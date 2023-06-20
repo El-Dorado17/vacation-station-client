@@ -8,7 +8,7 @@ import { deleteVacation } from "../managers/VacationManager.js"
 
 export const YourVacations = () => {
     const [ vacations, setVacations ] = useState([])
-    const navigate = useNavigate
+    const navigate = useNavigate()
     useEffect(() => {
         getUserVacations().then(data => setVacations(data))
     }, []) 
@@ -33,26 +33,11 @@ export const YourVacations = () => {
         });
     };
 
-    const editButton = () => {
-        return (
-            <button className="editButton"
-            onClick={() => {
-                editV()
-            }}>
-                EDIT
-            </button>
-        )
-    }
-
-    const editV = () => {
-        navigate("/updatevacation")
-    }
-
     return (
         <article> {
                 vacations.map(vacation => {
                     return <section key={`vacation--${vacation.id}`} className="vacation_post">
-                                <article>{deleteButton(vacation)} <div>{editButton()}</div>
+                                <article>{deleteButton(vacation)} <div> </div>
                                     <div className="vacation__id"> Vacation Number: {vacation.id}</div>
                                     <div className="vacation__country"> Country: {vacation.vacation.country.name}</div>
                                     <div className="vacation__city"> City: {vacation.vacation.city} </div>
@@ -62,6 +47,9 @@ export const YourVacations = () => {
                                     <div className="vacation__number_of_people"> Num of ppl: {vacation.vacation.number_of_people} </div>
                                     <div className="vacation__price"> Price: {vacation.vacation.price} </div>
                                     <div className="vacation__rating"> Rating (out of 5): {vacation.vacation.rating} </div>
+                                    <button className="editBttn"
+                                        onClick={() => {navigate(`/updateform/${vacation.id}`)}}>Update This Vacation
+                                    </button>
                                 </article>
                     </section>
                 })
