@@ -7,19 +7,27 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="navButton">
+                <button className="VacationList"
+                onClick={() => {
+                    navigate('/')
+                }}>
+                    See All Vacation Posts
+                </button>
+            </li>
+            <li className="navButton">
                 <button className="VacationForm"
                 onClick={() => {
                     navigate('/vacationform')
                 }}>
-                    Register A Vacation
+                    Post a Vacation
                 </button>
             </li>
             <li className="navButton">
-                <button className="UpdateForm"
+                <button className="YourVacations"
                 onClick={() => {
-                    navigate('/updatevacation')
+                    navigate('/uservacations')
                 }}>
-                    Update A Vacation
+                    Your Vacations
                 </button>
             </li>
 

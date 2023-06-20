@@ -10,6 +10,16 @@ export const getVacations = () => {
         .then(response => response.json())
 }
 
+export const getUserVacations = () => {
+    let token = getToken()
+    return fetch(`http://localhost:8000/uservacations`, {
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    })
+        .then(res => res.json())
+}
+
 export const createVacation = (vacation) => {
     let token = getToken()
     return fetch("http://localhost:8000/vacations", {
@@ -23,8 +33,8 @@ export const createVacation = (vacation) => {
         .then(response => response.json())
 }
 
-export const updateVacation = (updatedVacation, vacationId) => {
-    return fetch(`http://localhost:8000/vacations/${vacationId}`, {
+export const updateVacation = (id, updatedVacation) => {
+    return fetch(`http://localhost:8000/vacations/${id}`, { //{updtvacatin} expects id but got obj
         method: "PUT",
         headers: {
         "Content-Type": "application/json",
@@ -42,7 +52,7 @@ export const updateVacation = (updatedVacation, vacationId) => {
 };
 
 export const deleteVacation = (id) => {
-    return fetch(`http://localhost:8000/vacations/${id}`, {
+    return fetch(`http://localhost:8000/uservacations/${id}`, {
         method: "DELETE",
         headers: {
         Authorization: `Token ${getToken()}`
@@ -80,3 +90,6 @@ export const getAllVacationtypes = () => {
   })
     .then(res => res.json())
 }
+
+
+//#Localhost:8000/vacations?user=${userId}
