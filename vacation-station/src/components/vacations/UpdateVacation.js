@@ -11,6 +11,7 @@ const navigate = useNavigate()
 const [vacationTypes, setVacationTypes] = useState([])
 const [vacation, setVacation] = useState([])
 const [currentVacation, setCurrentVacation] = useState({
+        id: 0,
         country: 0,
         city: "",
         vacation_type: 0,
@@ -26,6 +27,7 @@ useEffect (()=> {
         setVacation(res)
         setCurrentVacation({
             ...currentVacation,
+            id: parseInt(res?.vacation?.id),
             country: parseInt(res?.country?.id),
             city: res?.city,
             vacation_type: parseInt(res?.vacation_type?.id),
@@ -52,6 +54,22 @@ const changeVacationState = (evt) => {
 return (
     <form className="vacationForm">
         <h2 className="vacationForm_description"> Update Vacation</h2>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="id"> Vacation ID </label>
+                <input
+                    type="text"
+                    name="id"
+                    required
+                    autoFocus
+                    className="form-control"
+                    value={currentVacation.id}
+                    placeholder={vacation.id}
+                    onChange={changeVacationState}
+                    />
+            </div>
+        </fieldset>
+
         <fieldset>
             <div className="form-group">
                 <label htmlFor="country"> Country </label>
@@ -191,6 +209,7 @@ return (
                 evt.preventDefault()
 
                 const vacation = {
+                    id: currentVacation.id,
                     country: currentVacation.country,
                     city: currentVacation.city,
                     vacation_type: currentVacation.vacation_type,

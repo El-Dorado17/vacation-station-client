@@ -11,26 +11,31 @@ export const VacationForm = () => {
         country: 0,
         city: "",
         vacation_type: 0,
-        vacation_user: 0,
+        vacation_user: 0, //get rid of this
         description: "",
         number_of_people: 0,
         price: 0,
         rating: 0
     })
 
+
+
+
     useEffect(() => {
         getVacationTypes().then((data)=>setVacationTypes(data))
     }, [])
 
+
+
+
     const changeVacationState = (e) => {
-        const {name, value} = e.target
+        const { value} = e.target
         setCurrentVacation(
             {...currentVacation,
                 [e.target.name]: value
             }
         )
     }
-                        //! make country a select
     
     
     return (
@@ -39,35 +44,38 @@ export const VacationForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="country">Country: </label>
-                    <input type="number" name="country" required autoFocus className="form-control"/>
+                    <input type="number" name="country" required autoFocus className="form-control"
+                    value={currentVacation.country}
+                    onChange={changeVacationState}
+                    />
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="city">City: </label>
-                    <input type="text" name="city" required autoFocus className="form-control"/>
+                    <input type="text" name="city" required autoFocus className="form-control"
+                    value={currentVacation.city}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="vacationtypeid">Vacation Type: </label>
-                    <input type="number" name="vacationtypeid" required autoFocus className="form-control"/>
+                    <label htmlFor="vacationtype">Vacation Type: </label>
+                    <input type="number" name="vacation_type" required autoFocus className="form-control"
+                    value={currentVacation.vacation_type}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="vacation_user">Vacation User: </label>
-                    <input type="number" name="vacation_user" required autoFocus className="form-control"/>
-                </div>
-            </fieldset>
 
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Description </label>
-                    <input type="text" name="description" required autoFocus className="form-control"/>
+                    <input type="text" name="description" required autoFocus className="form-control"
+                    value={currentVacation.description}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
@@ -75,21 +83,27 @@ export const VacationForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="numberofpeople">number of people: </label>
-                    <input type="number" name="numberofpeople" required autoFocus className="form-control"/>
+                    <input type="number" name="number_of_people" required autoFocus className="form-control"
+                    value={currentVacation.number_of_people}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="price"> Price </label>
-                    <input type="number" name="price" required autoFocus className="form-control"/>
+                    <input type="number" name="price" required autoFocus className="form-control"
+                    value={currentVacation.price}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="rating"> Rating </label>
-                    <input type="number" name="rating" required autoFocus className="form-control"/>
+                    <input type="number" name="rating" required autoFocus className="form-control"
+                    value={currentVacation.rating}
+                    onChange={changeVacationState}/>
                 </div>
             </fieldset>
 
@@ -113,7 +127,7 @@ export const VacationForm = () => {
                     createVacation(vacation)
                         .then(() => navigate("/"))
                 }}
-                className="btn btn-primary">Create</button>
+                className="btn btn-primary"> Create</button>
         </form>
     )
 }
