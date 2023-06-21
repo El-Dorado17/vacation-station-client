@@ -48,7 +48,7 @@ export const YourVacations = () => {
                                     <div className="vacation__price"> Price: {vacation.vacation.price} </div>
                                     <div className="vacation__rating"> Rating (out of 5): {vacation.vacation.rating} </div>
                                     <button className="editBttn"
-                                        onClick={() => {navigate(`/updateform/${vacation.id}`)}}>Update This Vacation
+                                        onClick={() => {navigate(`/updateform/${vacation.vacation.id}`)}}>Update This Vacation
                                     </button>
                                 </article>
                     </section>

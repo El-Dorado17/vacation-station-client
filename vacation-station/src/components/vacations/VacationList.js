@@ -12,7 +12,8 @@ export const VacationList = (props) => {
         getVacations().then(data => setVacations(data))
     }, []) 
 
-
+	const localVacationUser = localStorage.getItem("vacation_user_id")
+    const vacationUserObject = JSON.parse(localVacationUser)
 
     return (
         <article className="vacations">
@@ -28,7 +29,7 @@ export const VacationList = (props) => {
                                 <div className="vacation__number_of_people"> Num of ppl: {vacation.number_of_people} </div>
                                 <div className="vacation__price"> Price: {vacation.price} </div>
                                 <div className="vacation__rating"> Rating (out of 5): {vacation.rating} </div>
-                    </section>
+                            </section>
                 })
             }
         </article>

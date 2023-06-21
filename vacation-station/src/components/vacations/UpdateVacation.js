@@ -11,7 +11,7 @@ const navigate = useNavigate()
 const [vacationTypes, setVacationTypes] = useState([])
 const [vacation, setVacation] = useState({})
 const [currentVacation, setCurrentVacation] = useState({
-        id: 0,
+        // id: 0,
         country: 0,
         city: "",
         vacation_type: 0,
@@ -27,7 +27,7 @@ const [currentVacation, setCurrentVacation] = useState({
 //         setVacation(res)
 //         setCurrentVacation({
 //             ...currentVacation,
-//            // id: parseInt(res?.vacation?.id),
+//             id: parseInt(res?.vacation?.id),
 //             country: parseInt(res?.country?.id),
 //             city: res?.city,
 //             vacation_type: parseInt(res?.vacation_type?.id),
@@ -40,9 +40,13 @@ const [currentVacation, setCurrentVacation] = useState({
 //     })
 // }, [vacationId, currentVacation])
 
-useEffect(()=> {
-    getVacations().then((data)=> setVacation(data))
-}, [])
+useEffect(() => {
+    getVacationById(vacationId).then((res) => setCurrentVacation(res));
+}, []);
+
+// useEffect(()=> {
+//     getVacations().then((data)=> setVacation(data))
+// }, [])
 
 const changeVacationState = (evt) => {
     const {name, value} = evt.target
@@ -175,7 +179,7 @@ return (
                 evt.preventDefault()
 
                 const vacation = {
-                    id: currentVacation.id,
+                    id: parseInt(vacationId),
                     country: currentVacation.country,
                     city: currentVacation.city,
                     vacation_type: currentVacation.vacation_type,
@@ -187,7 +191,7 @@ return (
                 }
 
                 // Send POST request to your API
-                updateVacation(vacation.id, vacation) //!vacation 
+                updateVacation(vacation)
                     .then(() => navigate("/uservacations"))
             }}
             className="btn btn-primary">Update
