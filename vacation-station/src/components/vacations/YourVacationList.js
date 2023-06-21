@@ -28,7 +28,7 @@ export const YourVacations = () => {
     }
 
     const deleteV = (vacation) => {
-        deleteVacation(vacation.id).then(() => {  
+        deleteVacation(vacation.vacation.id).then(() => {  
             getUserVacations().then((data) => setVacations(data));
         });
     };
@@ -38,7 +38,7 @@ export const YourVacations = () => {
                 vacations.map(vacation => {
                     return <section key={`vacation--${vacation.id}`} className="vacation_post">
                                 <article>{deleteButton(vacation)} <div> </div>
-                                    <div className="vacation__id"> Vacation Number: {vacation.id}</div>
+                                    <div className="vacation__id"> Vacation Number: {vacation.vacation.id}</div>
                                     <div className="vacation__country"> Country: {vacation.vacation.country.name}</div>
                                     <div className="vacation__city"> City: {vacation.vacation.city} </div>
                                     <div className="vacation__vacation_type"> Vacation Type: {vacation.vacation.vacation_type.name} </div>

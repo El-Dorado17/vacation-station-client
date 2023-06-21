@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getAllVacationtypes, getVacationById, updateVacation } from "../managers/VacationManager";
-import { getVacations } from "../managers/VacationManager";
-
+import { getVacationById, updateVacation } from "../managers/VacationManager";
+//import { getVacations } from "../managers/VacationManager";
+import { getVacationTypes } from "../managers/VacationManager.js"
+import { getCountries } from "../managers/VacationManager.js"
 
 
 export const UpdateVacation = () => {
 const {vacationId} = useParams()
 const navigate = useNavigate()
 const [vacationTypes, setVacationTypes] = useState([])
+const [countries, setCountries] = useState([])
 const [vacation, setVacation] = useState({})
 const [currentVacation, setCurrentVacation] = useState({
         // id: 0,
@@ -22,27 +24,13 @@ const [currentVacation, setCurrentVacation] = useState({
         rating: 0
 })
 
-// useEffect (()=> {
-//     getVacationById(vacationId).then((res)=> {
-//         setVacation(res)
-//         setCurrentVacation({
-//             ...currentVacation,
-//             id: parseInt(res?.vacation?.id),
-//             country: parseInt(res?.country?.id),
-//             city: res?.city,
-//             vacation_type: parseInt(res?.vacation_type?.id),
-//             vacation_user: parseInt(res?.vacation_user?.id),
-//             description: res?.description,
-//             number_of_people: res?.number_of_people,
-//             price: res?.price,
-//             rating:res?.rating,
-//         })
-//     })
-// }, [vacationId, currentVacation])
+
 
 useEffect(() => {
     getVacationById(vacationId).then((res) => setCurrentVacation(res));
 }, []);
+
+
 
 // useEffect(()=> {
 //     getVacations().then((data)=> setVacation(data))
@@ -52,6 +40,15 @@ const changeVacationState = (evt) => {
     const {name, value} = evt.target
     setCurrentVacation((prevState)=> ({...prevState, [name]: value }))
 }
+useEffect(() => {
+    getVacationTypes().then((data)=>setVacationTypes(data))
+}, [])
+
+
+
+useEffect(() => {
+    getCountries().then((data)=>setCountries(data))
+}, [])
 
 
 return (
@@ -59,19 +56,16 @@ return (
         <h2 className="vacationForm_description"> Updating Vacation: {vacationId} </h2>
 
         <fieldset>
-            <div className="form-group">
-                <label htmlFor="country"> Country </label>
-                <input
-                    type="number"
-                    name="country"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentVacation.country}
-                    placeholder={vacation.country}
-                    onChange={changeVacationState}
-                    />
-            </div>
+            <label htmlFor="country">Country: </label>
+            <select onChange={changeVacationState} name="country">
+
+                {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                        {country.name}
+                        </option>
+                        )
+                    )}
+            </select>
         </fieldset>
 
         <fieldset>
@@ -91,19 +85,16 @@ return (
         </fieldset>
 
         <fieldset>
-            <div className="form-group">
-                <label htmlFor="vacation_type"> vacation_type </label>
-                <input
-                    type="number"
-                    name="vacation_type"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentVacation.vacation_type}
-                    placeholder={vacation.vacation_type}
-                    onChange={changeVacationState}
-                    />
-            </div>
+            <label htmlFor="country">Vacation Type: </label>
+            <select onChange={changeVacationState} name="vacation_type">
+
+                {vacationTypes.map((vacationType) => (
+                    <option key={vacationType.id} value={vacationType.id}>
+                        {vacationType.name}
+                        </option>
+                        )
+                    )}
+            </select>
         </fieldset>
 
         <fieldset>
@@ -159,7 +150,7 @@ return (
 
         <fieldset>
             <div className="form-group">
-                <label htmlFor="rating"> Rating </label>
+                <label htmlFor="rating"> Rating (out of 5)</label>
                 <input
                     type="number"
                     name="rating"
