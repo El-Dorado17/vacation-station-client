@@ -33,12 +33,12 @@ export const createVacation = (vacation) => {
         .then(response => response.json())
 }
 
-export const updateVacation = (id, updatedVacation) => {
-    return fetch(`http://localhost:8000/vacations/${id}`, { //{updtvacatin} expects id but got obj
+export const updateVacation = (updatedVacation) => {
+    return fetch(`http://localhost:8000/vacations/${updatedVacation.id}`, {
         method: "PUT",
         headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${getToken()}`
+        "Authorization": `Token ${getToken()}`
         },
         body: JSON.stringify(updatedVacation)
     })
@@ -52,7 +52,7 @@ export const updateVacation = (id, updatedVacation) => {
 };
 
 export const deleteVacation = (id) => {
-    return fetch(`http://localhost:8000/uservacations/${id}`, {
+    return fetch(`http://localhost:8000/ vacations/${id}`, {
         method: "DELETE",
         headers: {
         Authorization: `Token ${getToken()}`
