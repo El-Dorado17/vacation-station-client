@@ -52,7 +52,7 @@ export const updateVacation = (updatedVacation) => {
 };
 
 export const deleteVacation = (id) => {
-    return fetch(`http://localhost:8000/ vacations/${id}`, {
+    return fetch(`http://localhost:8000/vacations/${id}`, {
         method: "DELETE",
         headers: {
         Authorization: `Token ${getToken()}`
@@ -93,3 +93,14 @@ export const getAllVacationtypes = () => {
 
 
 //#Localhost:8000/vacations?user=${userId}
+
+
+export const getCountries = () => {
+    let token = getToken()
+    return fetch(`http://localhost:8000/countries`, {
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    })
+        .then(res => res.json())
+}

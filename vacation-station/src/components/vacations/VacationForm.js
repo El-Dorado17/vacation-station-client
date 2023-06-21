@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom"
 // import { getVacations } from "../managers/VacationManager.js"
 import { createVacation } from "../managers/VacationManager.js"
 import { getVacationTypes } from "../managers/VacationManager.js"
+import { getCountries } from "../managers/VacationManager.js"
 
 export const VacationForm = () => {
     const navigate = useNavigate()
     const [vacationTypes, setVacationTypes] = useState([])
+    const [countries, setCountries] = useState([])
     const [currentVacation, setCurrentVacation] = useState({
         country: 0,
         city: "",
@@ -27,6 +29,10 @@ export const VacationForm = () => {
 
 
 
+    useEffect(() => {
+        getCountries().then((data)=>setCountries(data))
+    }, [])
+
 
     const changeVacationState = (e) => {
         const { value} = e.target
@@ -41,14 +47,18 @@ export const VacationForm = () => {
     return (
         <form className="vacationForm">
             <h2 className="vacationForm__title">Register New Vacation</h2>
+
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="country">Country: </label>
-                    <input type="number" name="country" required autoFocus className="form-control"
-                    value={currentVacation.country}
-                    onChange={changeVacationState}
-                    />
-                </div>
+            <label htmlFor="country">Country: </label>
+            <select onChange={changeVacationState} name="country">
+
+                {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                        {country.name}
+                        </option>
+                        )
+                    )}
+                </select>
             </fieldset>
 
             <fieldset>
@@ -61,12 +71,16 @@ export const VacationForm = () => {
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="vacationtype">Vacation Type: </label>
-                    <input type="number" name="vacation_type" required autoFocus className="form-control"
-                    value={currentVacation.vacation_type}
-                    onChange={changeVacationState}/>
-                </div>
+            <label htmlFor="country">Vacation Type: </label>
+            <select onChange={changeVacationState} name="vacation_type">
+
+                {vacationTypes.map((vacationType) => (
+                    <option key={vacationType.id} value={vacationType.id}>
+                        {vacationType.name}
+                        </option>
+                        )
+                    )}
+                </select>
             </fieldset>
 
 
