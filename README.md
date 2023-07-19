@@ -1,6 +1,6 @@
 # vacation-station-client
 
-# To get the client-side running:
+<h2> To get  client-side running: </h2> 
 <br>
 1 - Clone this repository onto your machine
 <br>
